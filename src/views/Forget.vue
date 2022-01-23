@@ -1,7 +1,7 @@
 <template>
-  <div class="controller">
+  <div class="app-container">
     <a-card
-      style="width:100%"
+      style="width:100%;border: none;"
       :tab-list="tabListNoTitle"
       :active-tab-key="noTitleKey"
       @tabChange="key => onTabChange(key, 'noTitleKey')"
@@ -113,23 +113,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#app {
-  background-color: #f2f2f2;
-  overflow: hidden;
-}
-
-.controller {
-  width: 100%;
-  margin: 0 auto;
-  margin-top: 15px;
-  background-color: #fff;
-
-  ::v-deep .forget-pwd {
-  color: #000000;
-
-    &:hover {
-      color: #1890ff;
-    }
+.app-container {
+  ::v-deep .ant-form-item-children {
+    display: flex;
+  }
+  ::v-deep .ant-input-wrapper {
+    width: 300px;
+  }
+  ::v-deep .ant-input-group-addon {
+    width: 8em;
   }
 
   ::v-deep .ant-form-item-children {
@@ -149,9 +141,5 @@ export default {
       cursor: pointer;
     }
   }
-}
-
-.ant-input-group-wrapper::v-deep .ant-input-wrapper {
-  width: 300px;
 }
 </style>

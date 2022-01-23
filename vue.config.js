@@ -18,16 +18,12 @@ module.exports = {
       less: {
         lessOptions: {
           modifyVars: {
-            'primary-color': '#009688' // 全局主色
-
+            'primary-color': '#009688', // 全局主色
+            'link-color': '#009688'
           },
-          javascriptEnabled: 'true'
+          javascriptEnabled: true
         }
       }
     }
-  },
-  devServer: {
-    // mock server
-    proxy: 'http://localhost:36742'
   }
 }

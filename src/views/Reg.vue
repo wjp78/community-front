@@ -1,7 +1,7 @@
 <template>
-  <div class="controller">
+  <div class="app-container">
     <a-card
-      style="width:100%"
+      style="width:100%;border: none;"
       :tab-list="tabListNoTitle"
       :active-tab-key="noTitleKey"
       @tabChange="key => onTabChange(key, 'noTitleKey')"
@@ -47,24 +47,6 @@
 
             <a-col :span="24" style="margin-top: 20px;">
               <a-button type="primary" @click="Register"> 立即注册 </a-button>
-            </a-col>
-
-            <a-col :span="24">
-              <div class="layui-form-item fly-form-app">
-                <span>或者直接使用社交账号快捷注册</span>
-                <a
-                  href
-                  onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})"
-                  class="iconfont icon-qq"
-                  title="QQ登入"
-                ></a>
-                <a
-                  href
-                  onclick="layer.msg('正在通过微博登入', {icon:16, shade: 0.1, time:0})"
-                  class="iconfont icon-weibo"
-                  title="微博登入"
-                ></a>
-              </div>
             </a-col>
           </a-row>
         </a-form-model>
@@ -183,22 +165,11 @@ export default {
       reg(params).then(res => {
         if (res.code === 200) {
           this.$refs.ruleForm.resetFields()
-          this.$notification.success({
-            message: '登陆成功'
-          })
+          this.notifySuccess('注册成功')
           setTimeout(() => {
             // 跳转到登陆界面,让用户登陆
             this.$router.push('/login')
           }, 1000)
-        } else {
-          this.$message.error('您的账号或者密码输入错误!' + res.msg)
-        }
-      }).catch(err => {
-        const data = err.response.data
-        if (data.code === 500) {
-          this.$alert('用户名密码校验失败,请检查!')
-        } else {
-          this.$alert('服务器错误')
         }
       })
     }
@@ -212,18 +183,15 @@ export default {
   overflow: hidden;
 }
 
-.controller {
-  width: 100%;
-  margin: 0 auto;
-  margin-top: 15px;
-  background-color: #fff;
-
-  ::v-deep .forget-pwd {
-  color: #000000;
-
-    &:hover {
-      color: #1890ff;
-    }
+.app-container {
+  ::v-deep .ant-form-item-children {
+    display: flex;
+  }
+  ::v-deep .ant-input-wrapper {
+    width: 300px;
+  }
+  ::v-deep .ant-input-group-addon {
+    width: 8em;
   }
 
   ::v-deep .ant-form-item-children {
@@ -243,11 +211,13 @@ export default {
       cursor: pointer;
     }
   }
-}
-.ant-input-group-wrapper {
-  width: 300px;
-}
-.ant-input-group-wrapper::v-deep .ant-input-wrapper {
-  width: 300px;
+
+  .input-tips {
+    white-space: nowrap;
+    position: absolute;
+    top: 0;
+    left: 310px;
+    line-height: 32px;
+  }
 }
 </style>

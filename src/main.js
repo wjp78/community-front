@@ -2,11 +2,9 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import './components/modules/antDesign/lazy_antd'
+import './plugins/lazy_antd'
 import 'ant-design-vue/dist/antd.less'
-import Alert from './components/modules/alert'
-
-Vue.use(Alert)
+import './assets/font/iconfont.css'
 
 Vue.config.productionTip = false
 

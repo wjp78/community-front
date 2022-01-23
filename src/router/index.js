@@ -1,12 +1,3 @@
-/*
- * @Description:
- * @Company: 前端社区
- * @Author: Hugh
- * @Date: 2021-10-18 19:34:54
- * @LastEditors: Hugh
- * @LastEditTime: 2021-11-15 22:52:18
- * @FilePath: \front\src\router\index.js
- */
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
