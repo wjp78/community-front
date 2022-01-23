@@ -74,7 +74,7 @@
   </div>
 </template>
 <script>
-import { getCode } from '@/api/login'
+import { getCode, reg } from '@/api/login'
 
 export default {
   name: 'Reg',
@@ -156,7 +156,8 @@ export default {
   methods: {
     // 获取验证码
     _getCode () {
-      getCode().then(res => {
+      const sid = this.$store.state.sid
+      getCode(sid).then(res => {
         if (res.code === 200) {
           this.svg = res.data
         }
@@ -175,7 +176,31 @@ export default {
       } catch (err) {
         return this.$message.warning('注册错误,请输入必填项')
       }
-      console.log('this.form', this.form)
+      const params = Object.assign({}, this.form, {
+        sid: this.$store.state.sid
+      })
+      delete params.repassword
+      reg(params).then(res => {
+        if (res.code === 200) {
+          this.$refs.ruleForm.resetFields()
+          this.$notification.success({
+            message: '登陆成功'
+          })
+          setTimeout(() => {
+            // 跳转到登陆界面,让用户登陆
+            this.$router.push('/login')
+          }, 1000)
+        } else {
+          this.$message.error('您的账号或者密码输入错误!' + res.msg)
+        }
+      }).catch(err => {
+        const data = err.response.data
+        if (data.code === 500) {
+          this.$alert('用户名密码校验失败,请检查!')
+        } else {
+          this.$alert('服务器错误')
+        }
+      })
     }
   }
 }
