@@ -1,6 +1,4 @@
 import Vue from 'vue'
-// import { notifySuccess, notifyInfo, notifyWarning, notifyError } from '../notify/index'
-// base library
 import {
   ConfigProvider,
   Layout,
@@ -106,22 +104,3 @@ Vue.prototype.$info = Modal.info
 Vue.prototype.$success = Modal.success
 Vue.prototype.$error = Modal.error
 Vue.prototype.$warning = Modal.warning
-
-message.config({
-  duration: 2
-})
-
-notification.config({
-  duration: 3
-})
-// Vue.prototype.$notifySuccess = notifySuccess
-// Vue.prototype.$notifyInfo = notifyInfo
-// Vue.prototype.$notifyWarning = notifyWarning
-// Vue.prototype.$notifyError = notifyError
-// notifySuccess('成功通知测试')
-// notifyInfo('信息通知测试')
-// notifyWarning('警告通知测试')
-// notifyError('失败通知测试')
-// console.log('notify', notifySuccess)
-
-process.env.NODE_ENV !== 'production' && console.warn('[jeecg-boot-vue] NOTICE: Antd use lazy-load.')
