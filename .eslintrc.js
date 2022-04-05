@@ -15,11 +15,6 @@ module.exports = {
   // add your custom rules here
   //it is base on https://github.com/vuejs/eslint-config-vue
   rules: {
-<<<<<<< HEAD
-    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'space-before-function-paren': [2, "always"]
-=======
     "vue/max-attributes-per-line": [2, {
       "singleline": 10,
       "multiline": {
@@ -212,6 +207,5 @@ module.exports = {
       objectsInObjects: false
     }],
     'array-bracket-spacing': [2, 'never'] // 是否允许非空数组里面有多余的空格
->>>>>>> master
   }
 }

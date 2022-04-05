@@ -1,6 +1,6 @@
 const path = require('path')
 
-function resolve (dir) {
+function resolve(dir) {
   return path.join(__dirname, dir)
 }
 
@@ -18,15 +18,6 @@ module.exports = {
       less: {
         lessOptions: {
           modifyVars: {
-<<<<<<< HEAD
-            'primary-color': '#009688', // 全局主色
-            'link-color': '#009688'
-          },
-          javascriptEnabled: true
-        }
-      }
-    }
-=======
             'primary-color': '#009688' // 全局主色
           },
           javascriptEnabled: 'true'
@@ -47,6 +38,5 @@ module.exports = {
         maxAssetSize: 30000000
       }
     }
->>>>>>> master
   }
 }
