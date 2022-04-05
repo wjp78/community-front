@@ -1,29 +1,19 @@
 <template>
   <div class="controller">
-    <a-card
-      style="width:100%"
-      :tab-list="tabListNoTitle"
-      :active-tab-key="noTitleKey"
-      @tabChange="key => onTabChange(key, 'noTitleKey')"
-    >
+    <a-card style="width:100%" :tab-list="tabListNoTitle" :active-tab-key="noTitleKey" @tabChange="key => onTabChange(key, 'noTitleKey')">
       <p v-if="noTitleKey === 'forget'">
-        <a-form-model
-          ref="ruleForm"
-          :model="form"
-          :rules="rules"
-          :label-col="{ span: 4 }"
-          :wrapper-col="{ span: 10 }">
+        <a-form-model ref="ruleForm" :model="form" :rules="rules" :label-col="{ span: 4 }" :wrapper-col="{ span: 10 }">
           <a-row>
             <a-col span="24">
               <a-form-model-item prop="username">
-                <a-input addon-before="用户名" v-model="form.username" placeholder="请输入用户名" />
+                <a-input v-model="form.username" addon-before="用户名" placeholder="请输入用户名" />
               </a-form-model-item>
             </a-col>
             <a-col span="24">
               <a-form-model-item prop="code">
                 <div class="codeStyle">
-                  <a-input addon-before="验证码" v-model="form.code" placeholder="请输入验证码" />
-                  <div @click="_getCode" class="svg" v-html="svg"></div>
+                  <a-input v-model="form.code" addon-before="验证码" placeholder="请输入验证码" />
+                  <div class="svg" @click="_getCode" v-html="svg" />
                 </div>
               </a-form-model-item>
             </a-col>
@@ -43,7 +33,7 @@ import { getCode, forget } from '@/api/login'
 
 export default {
   name: 'Forget',
-  data () {
+  data() {
     return {
       tabListNoTitle: [
         {
@@ -64,20 +54,22 @@ export default {
       rules: {
         username: [
           { required: true, message: '请输入用户', trigger: 'change' },
-          { pattern: new RegExp('^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$'), message: '请输入正确的邮箱', trigger: 'change' }],
+          { pattern: new RegExp('^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$'), message: '请输入正确的邮箱', trigger: 'change' }
+        ],
         code: [
           { required: true, message: '请输入验证码', trigger: 'change' },
           { min: 4, message: '验证码长度必须为4', trigger: 'change' },
-          { max: 4, message: '验证码长度必须为4', trigger: 'change' }]
+          { max: 4, message: '验证码长度必须为4', trigger: 'change' }
+        ]
       }
     }
   },
-  mounted () {
+  mounted() {
     this._getCode()
   },
   methods: {
     // 获取验证码
-    _getCode () {
+    _getCode() {
       getCode().then(res => {
         if (res.code === 200) {
           this.svg = res.data
@@ -85,10 +77,10 @@ export default {
       })
     },
     // tab 改变
-    onTabChange (key, type) {
+    onTabChange(key, type) {
       this.$router.push(key)
     },
-    async forget () {
+    async forget() {
       try {
         const valid = await this.$refs.ruleForm.validate()
         if (!valid) {
@@ -125,7 +117,7 @@ export default {
   background-color: #fff;
 
   ::v-deep .forget-pwd {
-  color: #000000;
+    color: #000000;
 
     &:hover {
       color: #1890ff;

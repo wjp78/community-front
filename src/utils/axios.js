@@ -4,12 +4,12 @@ import axios from 'axios'
 import errorHandle from './errorHandle'
 
 class HttpRequest {
-  constructor (baseUrl) {
+  constructor(baseUrl) {
     this.baseUrl = baseUrl
   }
 
   // 获取axios配置
-  getInsideConfig () {
+  getInsideConfig() {
     const config = {
       baseURL: this.baseUrl,
       headers: {
@@ -21,7 +21,7 @@ class HttpRequest {
   }
 
   // 设定拦截器
-  interceptors (instance) {
+  interceptors(instance) {
     // 请求拦截器
     instance.interceptors.request.use((config) => {
       // Do something before request is sent
@@ -52,14 +52,14 @@ class HttpRequest {
   }
 
   // 创建实例
-  request (options) {
+  request(options) {
     const instance = axios.create()
     const newOptions = Object.assign(this.getInsideConfig(), options)
     this.interceptors(instance)
     return instance(newOptions)
   }
 
-  get (url, config) {
+  get(url, config) {
     const options = Object.assign({
       method: 'get',
       url: url
@@ -67,7 +67,7 @@ class HttpRequest {
     return this.request(options)
   }
 
-  post (url, data) {
+  post(url, data) {
     return this.request({
       method: 'post',
       url: url,

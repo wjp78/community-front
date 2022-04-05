@@ -11,13 +11,13 @@
   <div id="app">
     <a-layout id="components-layout-demo-top" class="layout">
       <!-- 顶部组件 -->
-      <imooc-header></imooc-header>
+      <imooc-header />
       <!-- 内容组件 -->
       <a-layout-content>
-        <router-view></router-view>
+        <router-view />
       </a-layout-content>
       <!-- 底部组件 -->
-      <imooc-footer></imooc-footer>
+      <imooc-footer />
     </a-layout>
   </div>
 </template>
@@ -27,7 +27,7 @@ import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
 
 export default {
-  name: 'app',
+  name: 'App',
   components: {
     'imooc-header': Header,
     'imooc-footer': Footer
@@ -36,5 +36,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import "assets/css/global.css";
+@import 'assets/css/global.css';
 </style>

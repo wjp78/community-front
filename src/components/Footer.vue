@@ -24,10 +24,9 @@
 
 <script>
 export default {
-  name: 'footers'
+  name: 'Footers'
 }
 </script>
 
 <style lang='scss' scoped>
-
 </style>

@@ -11,24 +11,19 @@
   <a-layout-header>
     <div class="layout-header-center">
       <div class="logo">
-        <img src="../assets/logo-2.png" alt="layui" />
+        <img src="../assets/logo-2.png" alt="layui">
       </div>
-      <a-menu
-        theme="dark"
-        mode="horizontal"
-        :default-selected-keys="['1']"
-        :style="{ lineHeight: '64px' }"
-      >
+      <a-menu theme="dark" mode="horizontal" :default-selected-keys="['1']" :style="{ lineHeight: '64px' }">
         <a-menu-item key="1">
-          <i class="iconfont icon-jiaoliu"></i>
+          <i class="iconfont icon-jiaoliu" />
           交流
         </a-menu-item>
         <a-menu-item key="2">
-          <i class="iconfont icon-iconmingxinganli"></i>
+          <i class="iconfont icon-iconmingxinganli" />
           案例
         </a-menu-item>
         <a-menu-item key="3">
-          <i class="iconfont icon-ui"></i>
+          <i class="iconfont icon-ui" />
           框架
         </a-menu-item>
       </a-menu>
@@ -36,7 +31,7 @@
       <ul class="layui-nav fly-nav-user">
         <!-- 未登入的状态 -->
         <li class="layui-nav-item">
-          <a class="iconfont icon-touxiang layui-hide-xs" href="../user/login.html"></a>
+          <a class="iconfont icon-touxiang layui-hide-xs" href="../user/login.html" />
         </li>
         <li class="layui-nav-item">
           <a href="../user/login.html">登入</a>
@@ -45,20 +40,10 @@
           <a href="../user/reg.html">注册</a>
         </li>
         <li class="layui-nav-item layui-hide-xs">
-          <a
-            href
-            onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})"
-            title="QQ登入"
-            class="iconfont icon-qq"
-          ></a>
+          <a href onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" title="QQ登入" class="iconfont icon-qq" />
         </li>
         <li class="layui-nav-item layui-hide-xs">
-          <a
-            href
-            onclick="layer.msg('正在通过微博登入', {icon:16, shade: 0.1, time:0})"
-            title="微博登入"
-            class="iconfont icon-weibo"
-          ></a>
+          <a href onclick="layer.msg('正在通过微博登入', {icon:16, shade: 0.1, time:0})" title="微博登入" class="iconfont icon-weibo" />
         </li>
 
         <!-- 登入后的状态 -->
@@ -86,7 +71,7 @@
 
 <script>
 export default {
-  name: 'headers'
+  name: 'Headers'
 }
 </script>
 

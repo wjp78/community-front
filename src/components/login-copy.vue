@@ -39,19 +39,18 @@
 import axios from 'axios'
 
 export default {
-  name: 'app',
-  data () {
+  name: 'App',
+  data() {
     return {
       svg: ''
     }
   },
-  mounted () {
+  mounted() {
     this.getCaptcha()
   },
   methods: {
-    getCaptcha () {
+    getCaptcha() {
       axios.get('http://localhost:3000/getCaptcha').then(res => {
-        console.log(res)
         if (res.status === 200) {
           const obj = res.data
           if (obj.code === 200) {
@@ -77,7 +76,7 @@ export default {
   background-color: #fff;
 
   ::v-deep .forget-pwd {
-  color: #000000;
+    color: #000000;
 
     &:hover {
       color: #1890ff;
