@@ -11,23 +11,9 @@
 
 <script>
 export default {
-
+  name: 'Footers'
 }
 </script>
 
-<style lang="scss" scoped>
-.footer-main{
-  margin: 50px 0 0;
-  padding: 20px 0 30px;
-  line-height: 30px;
-  text-align: center;
-  color: #737573;
-  border-top: 1px solid #e2e2e2;
-  .footer-bottom{
-    a{
-      margin-left: 10px;
-      color: #737573;
-    }
-  }
-}
+<style lang='scss' scoped>
 </style>

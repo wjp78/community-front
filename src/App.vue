@@ -1,17 +1,21 @@
 <template>
   <div id="app">
+    <a-layout>
       <!-- 顶部组件 -->
-      <imooc-header></imooc-header>
+      <imooc-header />
       <!-- 内容组件 -->
-      <router-view></router-view>
+      <a-layout-content>
+        <router-view />
+      </a-layout-content>
       <!-- 底部组件 -->
-      <imooc-footer></imooc-footer>
+      <imooc-footer />
+    </a-layout>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'app',
+  name: 'App',
   components: {
     ImoocHeader: () => import('@/components/Header'),
     ImoocFooter: () => import('@/components/Footer')
@@ -20,9 +24,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import '@/style/global.scss';
-#app {
-  height: 100%;
-  overflow-y: auto;
-}
+@import 'assets/css/global.css';
 </style>

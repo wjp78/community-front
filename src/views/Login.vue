@@ -1,24 +1,24 @@
 <template>
-  <div class="app-container">
-    <a-card style="width:100%; border: none;" :tab-list="tabListNoTitle" :active-tab-key="noTitleKey" @tabChange="key => onTabChange(key, 'noTitleKey')">
+  <div class="controller">
+    <a-card style="width:100%" :tab-list="tabListNoTitle" :active-tab-key="noTitleKey" @tabChange="key => onTabChange(key, 'noTitleKey')">
       <p v-if="noTitleKey === 'login'">
         <a-form-model ref="ruleForm" :model="form" :rules="rules" :label-col="{ span: 4 }" :wrapper-col="{ span: 10 }">
           <a-row>
             <a-col span="24">
               <a-form-model-item prop="username">
-                <a-input addon-before="用户名" v-model="form.username" placeholder="请输入用户名" />
+                <a-input v-model="form.username" addon-before="用户名" placeholder="请输入用户名" />
               </a-form-model-item>
             </a-col>
             <a-col span="24">
               <a-form-model-item prop="password">
-                <a-input addon-before="密码" v-model="form.password" type="password" placeholder="请输入密码" />
+                <a-input v-model="form.password" addon-before="密码" type="password" placeholder="请输入密码" />
               </a-form-model-item>
             </a-col>
             <a-col span="24">
               <a-form-model-item prop="code">
                 <div class="codeStyle">
-                  <a-input addon-before="验证码" v-model="form.code" placeholder="请输入验证码" />
-                  <div @click="_getCode" class="svg" v-html="svg"></div>
+                  <a-input v-model="form.code" addon-before="验证码" placeholder="请输入验证码" />
+                  <div class="svg" @click="_getCode" v-html="svg" />
                 </div>
               </a-form-model-item>
             </a-col>
@@ -35,8 +35,8 @@
             <!-- <a-col :span="24">
               <div class="layui-form-item fly-form-app">
                 <span>或者使用社交账号登入</span>
-                <a href onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" class="iconfont icon-QQ" title="QQ登入"></a>
-                <a href onclick="layer.msg('正在通过微博登入', {icon:16, shade: 0.1, time:0})" class="iconfont icon-xinlangweibo" title="微博登入"></a>
+                <a href onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" class="iconfont icon-qq" title="QQ登入" />
+                <a href onclick="layer.msg('正在通过微博登入', {icon:16, shade: 0.1, time:0})" class="iconfont icon-weibo" title="微博登入" />
               </div>
             </a-col> -->
           </a-row>
@@ -52,7 +52,14 @@ import uuid from 'uuid/dist/v4'
 export default {
   name: 'Login',
   components: {},
-  data () {
+  data() {
+    const checkCode = (rule, value, callback) => {
+      if (this.codeStatus) {
+        callback()
+      } else {
+        callback(new Error('验证码输入不正确!'))
+      }
+    }
     return {
       tabListNoTitle: [
         {
@@ -83,12 +90,18 @@ export default {
         code: [
           { required: true, message: '请输入验证码', trigger: 'change' },
           { min: 4, message: '验证码长度必须为4', trigger: 'change' },
-          { max: 4, message: '验证码长度必须为4', trigger: 'change' }
+          { max: 4, message: '验证码长度必须为4', trigger: 'change' },
+          { validator: checkCode, trigger: 'change' }
         ]
       }
     }
   },
-  mounted () {
+  watch: {
+    'form.code'(newVal) {
+      if (newVal && !this.codeStatus) this.codeStatus = true
+    }
+  },
+  mounted() {
     window.vue = this
     let sid = ''
     if (localStorage.getItem('sid')) {
@@ -103,7 +116,7 @@ export default {
   },
   methods: {
     // 获取验证码
-    _getCode () {
+    _getCode() {
       const sid = this.$store.state.sid
       getCode(sid).then(res => {
         if (res.code === 200) {
@@ -112,11 +125,11 @@ export default {
       })
     },
     // tab 改变
-    onTabChange (key, type) {
+    onTabChange(key, type) {
       this.$router.push(key)
     },
     // 登陆
-    async submit () {
+    async submit() {
       try {
         const valid = await this.$refs.ruleForm.validate()
         if (!valid) {
@@ -128,19 +141,34 @@ export default {
       const params = Object.assign({}, this.form, {
         sid: this.$store.state.sid
       })
-      login(params).then(res => {
-        if (res.code === 200) {
-          this.$refs.ruleForm.resetFields()
-          this.notifySuccess('登录成功')
-        }
-      })
+      login(params)
+        .then(res => {
+          if (res.code === 200) {
+            this.$refs.ruleForm.resetFields()
+          } else if (res.code === 401) {
+            this.codeStatus = false
+            this.$refs.ruleForm.validateField('code', err => {
+              console.log('err', typeof err)
+            })
+          } else {
+            this.$message.error('您的账号或者密码输入错误!')
+          }
+        })
+        .catch(err => {
+          const data = err.response.data
+          if (data.code === 500) {
+            this.$alert('用户名密码校验失败,请检查!')
+          } else {
+            this.$alert('服务器错误')
+          }
+          console.log('~ err', err.response)
+        })
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-
 .app-container {
   ::v-deep .ant-form-item-children {
     display: flex;

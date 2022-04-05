@@ -1,7 +1,7 @@
 <template>
   <div v-show="isShow">
     <div class="alert">
-      <div class="flex">{{msg}}</div>
+      <div class="flex">{{ msg }}</div>
       <div v-if="type==='alert'">
         <div class="btnCommon success" @click="close()">确定</div>
       </div>
@@ -10,7 +10,7 @@
         <div class="btnCommon success" @click="successEvent()">确定</div>
       </div>
     </div>
-    <div class="mask" @click="closeMask()"></div>
+    <div class="mask" @click="closeMask()" />
   </div>
 </template>
 
@@ -44,19 +44,19 @@ export default {
     }
   },
   methods: {
-    close () {
+    close() {
       this.isShow = false
     },
-    closeMask () {
+    closeMask() {
       if (this.type === 'alert') {
         this.close()
       }
     },
-    cancelEvent () {
+    cancelEvent() {
       this.cancel()
       this.close()
     },
-    successEvent () {
+    successEvent() {
       this.success()
       this.close()
     }
@@ -118,7 +118,7 @@ $btn-dark: darken($btn-main, 5%);
     }
   }
   &.cancel {
-    background: #EDEDED;
+    background: #ededed;
     color: #333;
   }
 }
